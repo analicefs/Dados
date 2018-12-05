@@ -1,0 +1,2491 @@
+{
+	"info": {
+		"_postman_id": "c3f4d81b-1df5-468b-a80a-dddd2cce5673",
+		"name": "Dados_abertos-",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pagamentoControle",
+			"description": "",
+			"item": [
+				{
+					"name": "buscarGastosOrgaosSuperiores",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0f962db6-b100-449d-9a95-2fcf679f7d1a",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									"// example using pm.expect()",
+									"pm.test(\"Testando se tem o codigo[0]\", function () { ",
+									"    var jsonData = pm.response.json();",
+									"   pm.expect(jsonData[0].cod).to.eql(25000);",
+									"   pm.expect(parseFloat(jsonData[0].total.toFixed(2))).to.eql(28742457151.62);",
+									"   pm.expect(jsonData[0].desc).to.eql(\"MINISTERIO DA FAZENDA\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/orgao_superior?top=10&mes_inicio=1&ano_inicio=2016&mes_final=1&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"orgao_superior"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "1"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosOrgaoSuperiorSemMes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "638d22c4-fc0d-43e5-b924-5e0003b41b17",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Requer que o parametro inteiro 'mes_inicio' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"mes_inicio não está presente\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/orgao_superior?top=10&ano_inicio=2016&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"orgao_superior"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosOrgaoSuperiorSemTop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9dc2674f-5ccb-4eb2-9a0e-86d413888353",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"Requer que o parametro inteiro 'top' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Top não está presente\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/orgao_superior?mes_inicio=1&ano_inicio=2016&mes_final=1&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"orgao_superior"
+							],
+							"query": [
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "1"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosPrograma",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7970997b-f335-4950-818d-8e3ae1d4a9c3",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									"// example using pm.expect()",
+									"pm.test(\"Testando se tem o codigo[0]\", function () { ",
+									"    var jsonData = pm.response.json();",
+									"   pm.expect(jsonData[0].cod).to.eql(909);",
+									"   pm.expect(parseFloat(jsonData[0].total.toFixed(2))).to.eql(16702705398.78);",
+									"   pm.expect(jsonData[0].desc).to.eql(\"Operações Especiais: Outros Encargos Especiais\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/programa?top=10&mes_inicio=1&ano_inicio=2016&mes_final=1&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"programa"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "1"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						},
+						"description": "localhost:8080/api/v1/pagamento/programa?top=10&mes_inicio=1&ano_inicio=2016&mes_final=1&ano_final=2016"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosAcao",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "edfc4384-471a-4f2d-a580-07ddf5d65f71",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"    ",
+									"});",
+									"",
+									"pm.test(\"Testando se tem o codigo[1]\", function () { ",
+									"    var jsonData = pm.response.json();",
+									"   pm.expect(jsonData[1].cod).to.eql(\"00H4\");",
+									"    pm.expect(jsonData[1].desc).to.eql(\"Seguro Desemprego\");",
+									"     pm.expect(parseFloat(jsonData[1].total.toFixed(2))).to.eql(6799943286.22);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/acao?top=10&mes_inicio=1&ano_inicio=2016&mes_final=1&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"acao"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "1"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosOrgaoSurbordinado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d8612dc6-d383-4811-bf52-acad88ca9b19",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									"// example using pm.expect()",
+									"pm.test(\"Testando se tem o codigo[0]\", function () { ",
+									"    var jsonData = pm.response.json();",
+									"   pm.expect(jsonData[1].cod).to.eql(38901);",
+									"   pm.expect(parseFloat(jsonData[1].total.toFixed(2))).to.eql(16561297880.26);",
+									"   pm.expect(jsonData[1].desc).to.eql(\"FUNDO DE AMPARO AO TRABALHADOR\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/orgao_subordinado?top=10&mes_inicio=1&ano_inicio=2016&mes_final=1&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"orgao_subordinado"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "1"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosOrgaoSurbordinadoSemTop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "392d2284-e8b4-4b0e-99e0-f6695e4362f5",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"Requer que o parametro 'top' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"top não está presente\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/orgao_subordinado?mes_inicio=1&ano_inicio=2016&mes_final=1&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"orgao_subordinado"
+							],
+							"query": [
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "1"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosOrgaoSurbordinadoSemMes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ed11f4f8-bf81-401b-830e-ae942b2e365a",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Requer que o parametro inteiro 'mes_inicio' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"mes_inicio não está presente\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/orgao_subordinado?top=10&ano_inicio=2016&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"orgao_subordinado"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosAcaoSemTop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d9889d1c-cb4b-4042-a0df-6480a2e55559",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Requer que o parametro inteiro 'Top' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Top não está presente\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/acao?mes_inicio&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"acao"
+							],
+							"query": [
+								{
+									"key": "mes_inicio",
+									"value": null
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosOrgaoSurbordinadoSemano",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "feb0d6f5-cb07-4972-baf8-f98cd76bcef3",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Faltando o ano final e mes final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/orgao_subordinado?top=10&mes_inicio=&ano_inicio=2016&ano_final",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"orgao_subordinado"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": ""
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": null
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosProgramaBadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b9f42035-af78-479b-85d2-40c85bbf901b",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Faltando o ano final e mes final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/programa?top=10&mes_inicio&ano_inicio=2016&ano_final",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"programa"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": null
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": null
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosAcaoBadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "43a48ce3-57dd-4978-9cb4-8f63e71b1851",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Faltando o ano final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/programa?top=10&ano_inicio=2016&mes_inicio=&=2016&mes_final3=&ano_final=",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"programa"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_inicio",
+									"value": ""
+								},
+								{
+									"key": "",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final3",
+									"value": ""
+								},
+								{
+									"key": "ano_final",
+									"value": ""
+								},
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosAcaoSemTop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f77e7220-65be-494f-badb-aa3b5c0a947d",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Faltando o Top\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"top' não está presente\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/acao?mes_inicio=1&ano_inicio=2016&mes_final=4&ano_final=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"acao"
+							],
+							"query": [
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "4"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								},
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosAcaoBadRequest Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3d7ff9d6-b2a3-4f23-981b-da86680e8fb7",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Faltando o ano final e mes_final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/acao?top=10&mes_inicio&ano_inicio=2016&ano_final",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"acao"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": null
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": null
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosAcaoBadRequest Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3d7ff9d6-b2a3-4f23-981b-da86680e8fb7",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Faltando o ano final e mes_final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/acao?top=10&mes_inicio&ano_inicio=2016&ano_final",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"acao"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": null
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": null
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "servidorControle",
+			"description": "",
+			"item": [
+				{
+					"name": "gastosOrgaoSuperiorServidor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a95d15bd-74b2-45bd-a0cd-385413d62bc0",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									"// example using pm.expect()",
+									"pm.test(\"Testando se tem o codigo[0]\", function () { ",
+									"    var jsonData = pm.response.json();",
+									"   pm.expect(jsonData[0].cod).to.eql(15000);",
+									"   pm.expect(parseFloat(jsonData[0].total.toFixed(2))).to.eql(6340939199.75);",
+									"  pm.expect(jsonData[0].desc).to.eql(\"MINISTERIO DA EDUCACAO\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior?top=10&mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorServidorSemMes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b7b69def-97c6-4b3f-9ed2-1d8aae1890d0",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Requer que o parametro inteiro 'mes_inicio' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Mês não está presente\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior?top=10&ano_inicio=2016&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorServidorSemTop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2e038fc5-eb64-4016-b993-7c590fe3a836",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Requer que o parametro inteiro 'Top' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Top não está presente\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior?mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior"
+							],
+							"query": [
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorFuncao",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2dd838f2-07a1-4839-8840-2d8a5df258f4",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/funcao?top=10&mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"funcao"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorFuncaoSemTop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5e65c64b-df65-439b-a25b-eecd428ee1b9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Requer que o parametro inteiro 'Top' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Top não está presente\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/funcao?mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"funcao"
+							],
+							"query": [
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorCargoSemTop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb47ac6b-39b3-4120-8363-10b90d7f0be7",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Requer que o parametro inteiro 'Top' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Top não está presente\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/cargo?mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"cargo"
+							],
+							"query": [
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								},
+								{
+									"key": null,
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorFuncaoSemMes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "acae8354-fb15-4fae-b5cb-248d35084cb7",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Requer que o parametro inteiro 'mes_inicio' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Mes não está presente\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/funcao?top=10&ano_inicio=2016&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"funcao"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorCargoSemMes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "acae8354-fb15-4fae-b5cb-248d35084cb7",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Requer que o parametro inteiro 'mes_inicio' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Mes não está presente\");",
+									"});",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/cargo?top=10&ano_inicio=2016&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"cargo"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorCargo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a95d15bd-74b2-45bd-a0cd-385413d62bc0",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									"// example using pm.expect()",
+									"pm.test(\"Testando se tem o codigo[0]\", function () { ",
+									"    var jsonData = pm.response.json();",
+									"   pm.expect(jsonData[0].cod).to.eql(15000);",
+									"   pm.expect(parseFloat(jsonData[0].total.toFixed(2))).to.eql(6340939199.75);",
+									"  pm.expect(jsonData[0].desc).to.eql(\"MINISTERIO DA EDUCACAO\");",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "35018427-7d20-4cd6-9c13-ebb09ab6596f",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/cargo?top=10&mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"cargo"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSubordinado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "927f07cc-93ac-4343-ab1a-4e5bf36aabac",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									"// example using pm.expect()",
+									"pm.test(\"Testando se tem o codigo[0]\", function () { ",
+									"    var jsonData = pm.response.json();",
+									"   pm.expect(jsonData[0].cod).to.eql(17000);",
+									"   pm.expect(parseFloat(jsonData[0].total.toFixed(2))).to.eql(1301386845.61);",
+									"  pm.expect(jsonData[0].desc).to.eql(\"MINISTERIO DA FAZENDA\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_subordinado?top=10&mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_subordinado"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSubordinadoFuncao",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "59c588bc-d039-4365-a327-fc3b288f7b11",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_subordinado/funcao?top=10&mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_subordinado",
+								"funcao"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorBadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "830a9427-dd66-4113-9b63-3ac56ff16866",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Faltando o ano final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior?top=10&mes_inicio=&ano_inicio=2016&mes_final=&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": ""
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": ""
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorSemMes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae2aceea-8051-4b80-9ee9-8f84c14ef60e",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"Requer que o parametro inteiro 'mes_inicio' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Mes não está presente\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior?top=10&ano_inicio=2016&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorCargoBadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e59caaa3-5b2b-4d00-9e61-226d78b426bc",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Faltando o ano final e o mes final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/cargo?top=10&mes_inicio=&ano_inicio=2016&mes_final=&ano_final=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"cargo"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": ""
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": ""
+								},
+								{
+									"key": "ano_final",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorFuncaoBadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "830a9427-dd66-4113-9b63-3ac56ff16866",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Faltando o ano final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/funcao?top=10&mes_inicio=&ano_inicio=2016&mes_final=&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"funcao"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": ""
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": ""
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSubordinadoBadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "830a9427-dd66-4113-9b63-3ac56ff16866",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Faltando o ano final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_subordinado?top=10&mes_inicio=&ano_inicio=2016&mes_final=&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_subordinado"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": ""
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": ""
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSubordinadoCargoSemMes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9e20c8e9-03f1-47a1-b5d3-dffd3f533839",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"Requer que o parametro inteiro 'mes_inicio' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"mes_inicio não está presente\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_subordinado/cargo?top=10&ano_inicio=2016&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_subordinado",
+								"cargo"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSubordinadoFuncaoBadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "830a9427-dd66-4113-9b63-3ac56ff16866",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Faltando o ano final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_subordinado/funcao?top=10&mes_inicio=&ano_inicio=2016&mes_final=&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_subordinado",
+								"funcao"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": ""
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": ""
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSubordinadoFuncaoSemTop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "46bbe7f0-41e5-4236-b1b0-2566b83f05fe",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Requer que o parametro inteiro 'Top' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Top não está presente\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_subordinado/funcao?mes_inicio1=&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_subordinado",
+								"funcao"
+							],
+							"query": [
+								{
+									"key": "mes_inicio1",
+									"value": ""
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSubordinadoFuncaoSemMes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "104974ed-f11b-4eae-ae85-9daae2dbe48a",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Requer que o parametro inteiro 'mes_inicio' esteja presente\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"     var json = pm.response.json();",
+									"      json['message'].includes(\"Mes não está presente\");",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_subordinado/funcao?top=10&ano_inicio=2016&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_subordinado",
+								"funcao"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarGastosAcaoBadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "43a48ce3-57dd-4978-9cb4-8f63e71b1851",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"",
+									"",
+									"pm.test(\"Faltando o ano final\", function () {",
+									"    pm.response.to.have.status(\"Bad Request\");",
+									"     pm.response.to.have.status(400);",
+									"     pm.test[\"Status code is 200\"] = responseCode.code === 400;",
+									"      var json = pm.response.json();",
+									"      json['message'].includes(\"NumberFormatException\");",
+									"});",
+									"",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "localhost:8080/api/v1/pagamento/programa?top=10&ano_inicio=2016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"pagamento",
+								"programa"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								}
+							]
+						},
+						"description": "Procura os 10 orgãos subordinados\n"
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorCargo Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a95d15bd-74b2-45bd-a0cd-385413d62bc0",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									"// example using pm.expect()",
+									"pm.test(\"Testando se tem o codigo[0]\", function () { ",
+									"    var jsonData = pm.response.json();",
+									"   pm.expect(jsonData[0].cod).to.eql(15000);",
+									"   pm.expect(parseFloat(jsonData[0].total.toFixed(2))).to.eql(6340939199.75);",
+									"  pm.expect(jsonData[0].desc).to.eql(\"MINISTERIO DA EDUCACAO\");",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9162f44c-e850-4ffe-be5e-c5ac9b27b887",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/cargo?top=10&mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"cargo"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "gastosOrgaoSuperiorCargo Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a95d15bd-74b2-45bd-a0cd-385413d62bc0",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"resposta é válida e tem body\", function () {",
+									"     pm.response.to.be.ok; // é válida",
+									"     pm.response.to.be.withBody;//está com corpo",
+									"     pm.response.to.be.json; //passa um json",
+									"});",
+									"",
+									"// example using pm.expect()",
+									"pm.test(\"Testando se tem o codigo[0]\", function () { ",
+									"    var jsonData = pm.response.json();",
+									"   pm.expect(jsonData[0].cod).to.eql(15000);",
+									"   pm.expect(parseFloat(jsonData[0].total.toFixed(2))).to.eql(6340939199.75);",
+									"  pm.expect(jsonData[0].desc).to.eql(\"MINISTERIO DA EDUCACAO\");",
+									"});"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9162f44c-e850-4ffe-be5e-c5ac9b27b887",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/servidor/orgao_superior/cargo?top=10&mes_inicio=1&ano_inicio=2016&mes_final=3&ano_final=2016",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"servidor",
+								"orgao_superior",
+								"cargo"
+							],
+							"query": [
+								{
+									"key": "top",
+									"value": "10"
+								},
+								{
+									"key": "mes_inicio",
+									"value": "1"
+								},
+								{
+									"key": "ano_inicio",
+									"value": "2016"
+								},
+								{
+									"key": "mes_final",
+									"value": "3"
+								},
+								{
+									"key": "ano_final",
+									"value": "2016"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

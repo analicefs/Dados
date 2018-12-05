@@ -1,0 +1,15 @@
+﻿CREATE TABLE pagamentos.pagamento_codigos(
+  cod_orgao_superior integer,
+  cod_orgao_subordinado integer,
+  cod_programa integer,
+  cod_acao character varying,
+  cod_elemento_despesa integer,
+  FOREIGN KEY(cod_orgao_superior) REFERENCES pagamentos.orgao_superior (cod_orgao_superior),
+FOREIGN KEY(cod_orgao_subordinado) REFERENCES pagamentos.orgao_subordinado (cod_orgao_subordinado),
+FOREIGN KEY(cod_programa) REFERENCES pagamentos.programa (cod_programa),
+FOREIGN KEY(cod_acao) REFERENCES pagamentos.acao (cod_acao),
+FOREIGN KEY(cod_elemento_despesa) REFERENCES pagamentos.elemento_despesa (cod_elemento_despesa));
+
+INSERT INTO pagamentos.pagamento_codigos
+SELECT distinct cod_orgao_superior, cod_orgao_subordinado, cod_programa, cod_acao, cod_elemento_despesa
+FROM pagamentos.pagamento;
